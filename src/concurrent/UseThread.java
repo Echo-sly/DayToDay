@@ -6,13 +6,13 @@ package concurrent;
  *
  * 使用 Thread 来进行开发
  */
-public class UseTread extends Thread {
+public class UseThread extends Thread {
 	public static void main(String[] args) {
 
-		UseTread aThread = new UseTread();
+		UseThread aThread = new UseThread();
 		aThread.start();
 
-		UseTread bThread = new UseTread();
+		UseThread bThread = new UseThread();
 		bThread.start();
 
 

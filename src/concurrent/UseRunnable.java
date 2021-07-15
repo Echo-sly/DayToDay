@@ -9,8 +9,8 @@ package concurrent;
 public class UseRunnable implements Runnable {
 	public static void main(String[] args) {
 
-		UseTread aThread = new UseTread();
-		UseTread bThread = new UseTread();
+		UseThread aThread = new UseThread();
+		UseThread bThread = new UseThread();
 
 		aThread.start();
 		bThread.start();
