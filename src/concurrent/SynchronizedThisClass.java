@@ -35,7 +35,7 @@ static class aThread {
 		}
 
 		void ok() {
-			synchronized (lockName1) {//把lockname1改为 aThread.class 即为锁类 当前为锁对象
+			synchronized (lockName1) {//把lockname1改为 aThread.class    即为锁类 当前为锁对象
 				try {
 					for (int i = 1; i < 30; i++) {
 						System.out.println("OK执行" + i + "次！");
