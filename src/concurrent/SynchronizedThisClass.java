@@ -9,15 +9,9 @@ public class SynchronizedThisClass {
 		aThread a = new aThread();
 		aThread b = new aThread();
 
-		new Thread(new Runnable(){
+		new Thread(() -> a.ok()).start();
 
-			@Override
-			public void run() {
-				a.ok();
-			}
-		}).start();
-
-		new Thread(new Runnable(){
+		new Thread(new Runnable() {
 
 			@Override
 			public void run() {
@@ -27,7 +21,7 @@ public class SynchronizedThisClass {
 
 	}
 
-static class aThread {
+	static class aThread {
 		private String lockName1 = "A";
 		private String lockName2 = "B";
 
