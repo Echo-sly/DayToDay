@@ -16,9 +16,9 @@
 
 #### 集合
 
-1.[什么叫 FailFAST 机制，有什么影响，怎么解决?](https://github.com/Echo-sly/DayToDay/tree/master/src/set/FailFAST.md)  
-2.[在多线程下 Map 有什么缺点?](https://github.com/Echo-sly/DayToDay/tree/master/src/set/DisadvantageOfMap.md)  
-3.[出现UnSupportedOperationException的原因](https://github.com/Echo-sly/DayToDay/tree/master/src/set/UnSupportedOperationException.md)
+1. [什么叫 FailFAST 机制，有什么影响，怎么解决?](https://github.com/Echo-sly/DayToDay/tree/master/src/set/FailFAST.md)
+2. [在多线程下 Map 有什么缺点?](https://github.com/Echo-sly/DayToDay/tree/master/src/set/DisadvantageOfMap.md)
+3. [出现UnSupportedOperationException的原因](https://github.com/Echo-sly/DayToDay/tree/master/src/set/UnSupportedOperationException.md)
 
 #### 并发
 
