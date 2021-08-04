@@ -24,12 +24,14 @@ public class GenericityRefrigerator {
 
 		aRefrigerator.add("面包");
 		aRefrigerator.add("香肠");
-		aRefrigerator.add("薯片");//薯片为什么要放冰箱里？？
+		aRefrigerator.add("薯片");
+		//薯片为什么要放冰箱里？？
 		aRefrigerator.add("牛奶");
 
 		EatFromRefrigerator(aRefrigerator, "面包");
 		System.out.println("冰箱里还剩：");
-		ArrayListFourEachFunction.ArrayListFirstEachFunction(aRefrigerator);//正好试试刚刚写的那几个遍历的方法
+		ArrayListFourEachFunction.arrayListFirstEachFunction(aRefrigerator);
+		//正好试试刚刚写的那几个遍历的方法
 		EatFromRefrigerator(aRefrigerator, "薯片");
 		System.out.println("冰箱里还剩：");
 		ArrayListFourEachFunction.ArrayListSecondEachFunction(aRefrigerator);
