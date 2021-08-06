@@ -4,7 +4,7 @@
     <a href="https://github.com/Echo-sly/DayToDay"> <img src="https://badgen.net/github/stars/Echo-sly/DayToDay?icon=github&color=BA55D3"></a>
     <a href="https://github.com/Echo-sly/DayToDay"> <img src="https://badgen.net/github/forks/Echo-sly/DayToDay?icon=github&color=BA55D3"></a>
 </div>
-<br>
+<br><title></title>
 
 | 算法&nbsp; | JAVA |
 | :---: | :----: |
