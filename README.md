@@ -35,8 +35,8 @@
 
 #### MYSQL
 
-1. [MYSQL引擎](https://github.com/Echo-sly/DayToDay/blob/master/src/mysql/%20engine.md)
-2. [什么叫做事务？](https://github.com/Echo-sly/DayToDay/blob/master/src/mysql/Transaction.md)
-3. [事务的四大特性分别是什么？](https://github.com/Echo-sly/DayToDay/blob/master/src/mysql/Transaction.md)
-4. [MYSQL存储过程和函数](https://github.com/Echo-sly/DayToDay/blob/master/src/mysql/ProceduresAndFunctions.md)
-5. [MYSQL的隔离级别](https://github.com/Echo-sly/DayToDay/blob/master/src/mysql/transactionIsolationLevel.md)
+1. [MYSQL引擎](https://github.com/Echo-sly/DayToDay/blob/master/src/main/java/mysql/%20engine.md)
+2. [什么叫做事务？](https://github.com/Echo-sly/DayToDay/blob/master/src/main/java/mysql/Transaction.md)
+3. [事务的四大特性分别是什么？](https://github.com/Echo-sly/DayToDay/blob/master/src/main/java/mysql/Transaction.md)
+4. [MYSQL存储过程和函数](https://github.com/Echo-sly/DayToDay/blob/master/src/main/java/mysql/ProceduresAndFunctions.md)
+5. [MYSQL的隔离级别](https://github.com/Echo-sly/DayToDay/blob/master/src/main/java/mysql/transactionIsolationLevel.md)
