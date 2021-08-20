@@ -11,7 +11,6 @@ public class HungrySingle {
 	private static final HungrySingle s = new HungrySingle();
 
 	private HungrySingle() {
-
 	}
 
 	public static HungrySingle getInstance() {
