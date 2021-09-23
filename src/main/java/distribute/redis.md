@@ -359,4 +359,94 @@ bitmap的优势、限制
 
 - 限制
   redis中bit映射被限制在512MB之内，所以最大是2^32位。建议每个key的位数都控制下，因为读取时候时间复杂度O(n)，越大的串读的时间花销越多。
-  
+
+### 7.Redis管道(pipeline)
+
+- redis是一种基于客户端-服务端模型以及请求/响应协议的TCP服务。
+- redis客户端执行一条命令分4个过程。
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20210111233328537.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxOTkzMjA2,size_16,color_FFFFFF,t_70)
+
+- Redis管道介绍：
+- Redis 管道技术可以在服务器未响应时，客户端可以继续向服务器发送请求，并最终一次性读取所有服务器的响应。
+- 简单来说就是管道中的命令是没有关系的，他们只是像管道一样流水发给服务器，而不是串行执行。
+- PIPELINING 是一种几十年来广泛使用的技术，例如许多pop3协议已经实现支持这个功能，大大加快了服务器下载新邮件的过程。
+- 在一个管道中执行的N个命令，是不具有原子性的，不会像MYSQL事务一样要么同时成功，要么同时失败。
+
+### 8.Redis事务
+
+- 单个 Redis 命令的执行是原子性的，但 Redis 没有在事务上增加任何维持原子性的机制，所以 Redis 事务的执行并不是原子性的。
+
+- 事务可以理解为一个打包的批量执行脚本，但批量指令并非原子化的操作，中间某条指令的失败不会导致前面已做指令的回滚，也不会造成后续的指令不做。
+
+### 9.Redis发布订阅（类似于MQ）
+
+- Redis发布订阅（pub/sub）是一种消息通信模式：发送者（pub）发送消息，订阅者（sub）接收消息。
+- Redis客户端可以订阅任意数量的频道。
+- ![img](https://www.runoob.com/wp-content/uploads/2014/11/pubsub1.png)
+
+![img](https://www.runoob.com/wp-content/uploads/2014/11/pubsub2.png)
+
+### 10.Redis集群数据复制原理：
+
+- Redis提供了复制功能，可以实现在主数据库(Master)中的数据更新后，自动将更新的数据同步到从数据库(Slave)。一个数据库可以拥有多个从数据库，而一个从数据库只能拥有一个主数据库。
+
+- 
+
+![image-20210923002043589](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210923002043589.png)
+
+### 11.Redis集群
+
+- Redis有三种集群模式：主从模式、哨兵模式(Sentinel)、集群模式(Cluster)
+
+  ### 主从模式
+
+  - 主从模式市三种模式中最简单的，在主从复制中，数据库分为两类：主数据库（master）和从数据库(slave).
+
+  - 主数据库可以进行读写操作，当读写操作导致数据变化时会自动将数据同步给从数据库。
+
+  - 从数据库一般都是只读的,并且接受主数据库同步过来的数据。
+
+  - 一个master可以拥有多少slave，但是一个slave只能对应一个master。
+
+  - slave挂了不影响其他的slave的读和master的读和写，重新启动后会将数据从master同步过来。
+
+  - master挂了以后，不影响slave的读，但redis 不再提供写服务，master重启后redis将重新对外提供写服务。
+
+  - master挂了以后，不会在slave节点中重新选一个master
+
+  - **缺点：**
+
+    **从上面可以看出，master节点在主从模式中唯一，若master挂掉，则redis无法对外提供写服务。**
+
+  ### 哨兵模式(Sentinel）
+
+- 主从模式的弊端就是不具备高可用性，当master挂掉以后，Redis将不能再对外提供写入操作，因此sentinel应运而生。
+
+- sentinel中文含义为哨兵，顾名思义，它的作用就是监控redis集群的运行状况
+
+- sentinel模式是建立在主从模式的基础上的，如果只有一个Redis 节点，sentinel没有任何意义。
+
+- 当master挂了以后，sentinel会在slave中选择一个做为master，并修改他们的配置文件，其他slave的配置文件也会被修改，比如slaveof属性会指向新的master。
+
+- 当master重新启动之后，它将不在是master而是作为slave接受新的master的同步数据
+
+- sentinel也是一个进程有挂掉的可能，所以sentinel也会启动多个形成一个sentinel集群。
+
+- 多sentinel配置的时候，sentinel之间也会自动监控。
+
+- 一个sentinel或sentinel集群可以管理多个主从Redis，多个sentinel也可以监控同一个redis
+
+- sentinel最好不要和Redis部署在同一台机器，不然Redis的服务器挂了以后，sentinel也挂了
+
+  ### 集群模式（Cluster）
+
+  - sentinel模式基本可以满足一般的生产需求，具有高可用性。但是当数据量过大到一台服务器存放不下的情况时，主从模式或sentinel模式就不能满足需求了，这个时候需要对存储的数据进行分片，将数据存储到多个Redis实例中。Cluster模式的出现就是为了解决单机Redis容量有限的问题，将Redis的数据根据一定的规则分配到多台机器。
+  - cluster可以说是sentinel和主从模式的结合体，通过cluster可以实现主从和master重选功能，所以如果配置两个副本三个分片的话，就需要六个Redis实例。因为Redis的数据是根据一定规则分配到cluster的不同机器的，当数据量过大时，可以新增机器进行扩容。
+  - 特点：
+  - 多个redis节点网络互联，数据共享
+  - 所有的节点都是一主一从（也可以时一主多从），其中从不提供服务，仅作为备用。
+  - 不支持同时处理多个key(如meset/mget)，因为redis需要把key均匀分布在各个节点上，并发量很高的情况下同时创建key-value会降低性能并导致不可预测的行为。
+  - 支持在线增加、删除节点。
+  - 客户端可以连接任何一个主节点进行读写
+
